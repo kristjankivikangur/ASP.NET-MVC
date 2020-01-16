@@ -29,5 +29,8 @@ namespace JalgrattaEksam.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<JalgrattaEksam.Models.Eksam> Eksams { get; set; }
+
     }
 }

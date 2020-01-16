@@ -1,0 +1,73 @@
+﻿@model IEnumerable<JalgrattaEksam.Models.LubaViewModel>
+
+@{
+    ViewBag.Title = "Luba";
+}
+
+<h2>Lubade väljastamine</h2>
+
+<p>
+ @Html.ActionLink("Registreeri eksamile", "Registreeri")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Eesnimi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Perenimi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Teooria)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Slaalom)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ringtee)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tee)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Luba)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Eesnimi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Perenimi)
+        </td>
+								<td>
+									@if (item.Teooria != -1)
+									{
+										@Html.DisplayFor(modelItem => item.Teooria)
+									}
+								</td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Slaalom)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ringtee)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tee)
+        </td>
+								<td>
+									@if (item.Luba == 1)
+									{
+										@:Väljastatud
+									}
+									else if (item.Tee == "korras")
+									{
+										@Html.ActionLink("Vormista", "Vormista", new { id = item.Id })
+									}
+								</td>
+    </tr>
+}
+
+</table>
