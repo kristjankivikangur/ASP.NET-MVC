@@ -62,7 +62,7 @@
 									{
 										@:Väljastatud
 									}
-									else if (item.Tee == "korras")
+									else if (item.Tee == "korras" && User.Identity.IsAuthenticated)
 									{
 										@Html.ActionLink("Vormista", "Vormista", new { id = item.Id })
 									}

@@ -10,6 +10,7 @@ using JalgrattaEksam.Models;
 
 namespace JalgrattaEksam.Controllers
 {
+ [Authorize]
  public class EksamsController : Controller
  {
   private ApplicationDbContext db = new ApplicationDbContext();
@@ -123,10 +124,15 @@ namespace JalgrattaEksam.Controllers
    db.SaveChanges();
    return RedirectToAction("Tee");
   }
+  [AllowAnonymous]
   public ActionResult Luba()
   {
    string[] valikud = { "","", "korras", "ebaõnnestunud" };
-   var model = db.Eksams.Select(u => new LubaViewModel
+   var model = db.Eksams
+    .OrderBy(u=>u.Luba)
+    .ThenByDescending(u=>u.Tee)
+    .ThenBy(u=>u.Perenimi)
+    .Select(u => new LubaViewModel
    {
     Id = u.Id,
     Eesnimi = u.Eesnimi,
